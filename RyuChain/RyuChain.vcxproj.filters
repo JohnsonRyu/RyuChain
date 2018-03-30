@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{c0f231b2-4d87-44da-a1fa-cdbdcd60f9a2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\CBlock.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CBlockHeader.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\stdafx.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CPow.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\KISA_SHA256.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CHash.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CMining.h">
+      <Filter>source</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CBlock.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CBlockHeader.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CPow.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\KISA_SHA256.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CHash.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CMining.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
