@@ -18,11 +18,12 @@ public:
 	void	Init();
 	void	LogData();
 	bool	IsNull();
-	BYTE*	GetBlockHash();
 	int64_t GetBlockTime();
+	vector<BYTE> GetBlockHash();
 
 public:
-	BYTE	 previousblockhash[32];
+	vector<BYTE> previousblockhash;
+	uint32_t nHeight;		// Height의 위치는 다시 고민
 	uint32_t nTime;
 	uint32_t nBits;
 	uint32_t nNonce;

@@ -13,6 +13,8 @@
 CBlock::CBlock(const CBlockHeader& a_cBlockHeader)
 {
 	*((CBlockHeader*)this) = a_cBlockHeader;
+
+	this->LogData();
 }
 //--------------------------------------------------------------------------------------------------
 CBlock::~CBlock(){}

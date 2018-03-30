@@ -19,6 +19,9 @@ CBlockHeader::~CBlockHeader(){}
 //--------------------------------------------------------------------------------------------------
 void CBlockHeader::Init()
 {
+	previousblockhash.clear();
+
+	nHeight = 0;
 	nTime	= 0;
 	nBits	= 0;
 	nNonce	= 0;
@@ -26,7 +29,28 @@ void CBlockHeader::Init()
 //--------------------------------------------------------------------------------------------------
 void CBlockHeader::LogData()
 {
+	printf("Block Info\n");
+	printf("PrevBlockHash\n");
 
+	if (0 == previousblockhash.size())
+		printf("Genesis Block");
+	else
+	{
+		for(BYTE by = 0; by < previousblockhash.size(); by++)
+		{
+			printf("%02X", previousblockhash[by]);
+		}
+	}
+
+	printf("\nCurBlockHash\n");
+
+	vector<BYTE> thisBlockHash = GetBlockHash();
+	for (BYTE by = 0; by < thisBlockHash.size(); by++)
+	{
+		printf("%02X", thisBlockHash[by]);
+	}
+
+	printf("\n");
 }
 //--------------------------------------------------------------------------------------------------
 bool CBlockHeader::IsNull()
@@ -34,15 +58,15 @@ bool CBlockHeader::IsNull()
 	return nBits == 0;
 }
 //--------------------------------------------------------------------------------------------------
-BYTE* CBlockHeader::GetBlockHash()
-{
-	return Hash->GetObjectHash(*this);
-}
-//--------------------------------------------------------------------------------------------------
 int64_t CBlockHeader::GetBlockTime()
 {
 	// TimeStamp
 
 	return 0;
+}
+//--------------------------------------------------------------------------------------------------
+vector<BYTE> CBlockHeader::GetBlockHash()
+{
+	return Hash->GetObjectHash(*this);
 }
 //--------------------------------------------------------------------------------------------------

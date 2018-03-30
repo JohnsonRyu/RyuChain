@@ -19,14 +19,8 @@ public:
 	~CHash();
 
 public:
-	BYTE* GetObjectHash(CBlockHeader& a_cBlockHeader);
+	vector<BYTE> GetObjectHash(CBlockHeader& a_cBlockHeader);
 
 private:
 	static CHash* GCHash;
 };
-
-//template<typename T>
-//CHashWriter& operator<<(const T& obj) {
-//	// Serialize to this stream
-//	::Serialize(*this, obj);		// "°´Ã¼ Á÷·ÄÈ­" 
-//	return (*this);

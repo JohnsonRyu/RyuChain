@@ -6,49 +6,32 @@ std::map<int, CBlock*> Blockchain;
 
 void main()
 {
+	// Genesis Block 생성
 	CBlockHeader* blockHeader = new CBlockHeader;
 	CBlock* genesisBlock = new CBlock(*blockHeader);
+
+	// 이건.. Height 값을 Key로 줄지 다시 생각해보자..
 	Blockchain.insert(std::make_pair(0, genesisBlock));
 	
 	CBlock* prevBlock = genesisBlock;
-	BYTE* aa = prevBlock->GetBlockHash();
 
-	BYTE hashValue[32] = prevBlock->GetBlockHash();
-
-	printf("%02X\n\n\n", aa);
-
-	for (int i = 0; i < sizeof(hashValue); i++)
+	for (BYTE by = 0; by < 10; by++)
 	{
-		printf("%02X", hashValue[i]);
+		// 블록 헤더 생성, nBits 지정하고, 이를 통해 POW 에서 난이도 생성 nonce 대입 함수
+		CBlockHeader* CurBlockHeader = new CBlockHeader;
+
+		// if nonce값을 찾았다면
+		// 데이터를 넣어주고, 블록에 넣어줌
+		CurBlockHeader->nNonce = 123421 + by;
+		CurBlockHeader->previousblockhash = prevBlock->GetBlockHash();
+
+		CBlock* CurBlock = new CBlock(*CurBlockHeader);
+
+		Blockchain.insert(std::make_pair(by + 1, CurBlock));
+		prevBlock = CurBlock;
 	}
 
-	printf("\n");
-
-
-	/*BYTE encypt[32];
-
-	stringstream ss;
-	string zs = "";
-	ss << uint32_t(123);
-	ss << uint32_t(230485);
-	ss << uint32_t(98);
-	ss << uint32_t(12);
-
-	printf("평문 : ");
-	scanf_s("%s", plain, sizeof(plain));
-
-	ss << plain;
-	ss >> zs;
-
-	BYTE* by = (BYTE*)zs.c_str();
-
-	SHA256_Encrpyt(by, zs.length(), encypt);
-
-	for (int i = 0; i < sizeof(encypt); i++)
-	{
-	printf("%02X", encypt[i]);
-	}
-	printf("\n");*/
+	
 	
 	return;
 }

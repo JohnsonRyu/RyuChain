@@ -6,6 +6,7 @@
 #include <map>
 #include <iostream>
 #include <sstream>
+#include <vector>
 
 #include "KISA_SHA256.h"
 
