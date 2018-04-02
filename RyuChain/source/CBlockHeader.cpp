@@ -29,20 +29,27 @@ void CBlockHeader::Init()
 //--------------------------------------------------------------------------------------------------
 void CBlockHeader::LogData()
 {
+	time_t time_now;
+	struct tm *tm;
+
+	time(&time_now);
+	tm = localtime(&time_now);
+
 	printf("Block Info\n");
-	printf("PrevBlockHash\n");
+	printf("%d년 %d월 %d일 %d시 %d분 %d초\n", tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec);
+	printf("PrevBlockHash : ");
 
 	if (0 == previousblockhash.size())
 		printf("Genesis Block");
 	else
 	{
-		for(BYTE by = 0; by < previousblockhash.size(); by++)
+		for (BYTE by = 0; by < previousblockhash.size(); by++)
 		{
 			printf("%02X", previousblockhash[by]);
 		}
 	}
-
-	printf("\nCurBlockHash\n");
+	
+	printf("\nCurBlockHash : ");
 
 	vector<BYTE> thisBlockHash = GetBlockHash();
 	for (BYTE by = 0; by < thisBlockHash.size(); by++)
@@ -50,7 +57,12 @@ void CBlockHeader::LogData()
 		printf("%02X", thisBlockHash[by]);
 	}
 
-	printf("\n");
+	printf("\n-CurBlockHeingt : %d", nHeight);
+	printf("\n--CurBlockTime : %"PRIu64"", nTime);
+	printf("\n---CurBlockBits : %d", nBits);
+	printf("\n----CurBlockNonce : %d", nNonce);
+
+	printf("\n\n");
 }
 //--------------------------------------------------------------------------------------------------
 bool CBlockHeader::IsNull()
@@ -58,11 +70,14 @@ bool CBlockHeader::IsNull()
 	return nBits == 0;
 }
 //--------------------------------------------------------------------------------------------------
+void CBlockHeader::SetBlockTime()
+{
+	nTime = chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now().time_since_epoch()).count();
+}
+//--------------------------------------------------------------------------------------------------
 int64_t CBlockHeader::GetBlockTime()
 {
-	// TimeStamp
-
-	return 0;
+	return static_cast<int64_t>(nTime);
 }
 //--------------------------------------------------------------------------------------------------
 vector<BYTE> CBlockHeader::GetBlockHash()
