@@ -8,40 +8,37 @@ uint32_t BlockHeight = 0;		// BlockHeight 변수 저장 위치에 대해서는 생각해보자. 
 
 void main()
 {
-	CMining* m_CMining = CMining::Instance();
+	CMining* m_pMining = CMining::Instance();
 
 	// Genesis Block 생성
 	CBlockHeader* blockHeader = new CBlockHeader;
-	blockHeader->nHeight = BlockHeight;
+	blockHeader->m_nHeight = BlockHeight;
 	CBlock* genesisBlock = new CBlock(*blockHeader);
-
-	BlockHeight++;
-
+	Blockchain.insert(std::make_pair(genesisBlock->m_nHeight, genesisBlock));
+	
 	CBlock* prevBlock = genesisBlock;
-
-	// 이건.. Height 값을 Key로 줄지 다시 생각해보자..
-	Blockchain.insert(std::make_pair(genesisBlock->nHeight, genesisBlock));
+	BlockHeight++;
 	
 	for (BYTE by = 0; by < 10; by++)
 	{
-		// 블록 헤더 생성, nBits 지정하고, 이를 통해 POW 에서 난이도 생성 nonce 대입 함수
 		CBlockHeader* CurBlockHeader = new CBlockHeader;
 		CurBlockHeader->previousblockhash = prevBlock->GetBlockHash();
-		CurBlockHeader->nHeight = BlockHeight;
-		CurBlockHeader->nBits = 0;
+		CurBlockHeader->m_nHeight = BlockHeight;
+		CurBlockHeader->m_nBits = 0;
 
-		m_CMining->SetBlockHeader(CurBlockHeader);
+		m_pMining->SetBlockHeader(CurBlockHeader);
 
-		while (!m_CMining->IsComplete())
+		// Cur Target Hash (난이도) > Block Hash
+		while (!m_pMining->IsComplete())
 		{
-			m_CMining->Update();
+			m_pMining->Update();
 		}
 		
-		// Nonce값을 찾았다면 해당 블록헤더를 가지고 온다.
-		CurBlockHeader = m_CMining->GetBlockHeader();
+		// Target Hash 값에 만족한 Nonce를 가지고 있는 BlockHeader
+		CurBlockHeader = m_pMining->GetBlockHeader();
 		
 		CBlock* CurBlock = new CBlock(*CurBlockHeader);
-		Blockchain.insert(std::make_pair(CurBlock->nHeight, CurBlock));
+		Blockchain.insert(std::make_pair(CurBlock->m_nHeight, CurBlock));
 		prevBlock = CurBlock;
 
 		BlockHeight++;

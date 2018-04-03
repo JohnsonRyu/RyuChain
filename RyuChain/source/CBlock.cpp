@@ -23,9 +23,9 @@ CBlockHeader CBlock::GetBlockHeader() const
 {
 	CBlockHeader block;
 	
-	block.nTime  = CBlock::nTime;
-	block.nBits  = CBlock::nBits;
-	block.nNonce = CBlock::nNonce;
+	block.m_nTime = CBlock::m_nTime;
+	block.m_nBits = CBlock::m_nBits;
+	block.m_nNonce = CBlock::m_nNonce;
 
 	return block;
 }

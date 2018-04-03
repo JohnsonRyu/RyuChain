@@ -24,8 +24,8 @@ public:
 
 public:
 	vector<BYTE> previousblockhash;
-	uint32_t nHeight;		// Height의 위치는 다시 고민
-	uint32_t nTime;			// Micro Seconds
-	uint32_t nBits;
-	uint32_t nNonce;
+	uint32_t m_nHeight;		// Height의 위치는 다시 고민
+	uint32_t m_nTime;			// Micro Seconds
+	uint32_t m_nBits;
+	uint32_t m_nNonce;
 };

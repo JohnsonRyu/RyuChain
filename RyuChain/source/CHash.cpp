@@ -26,15 +26,15 @@ CHash::~CHash(){}
 //--------------------------------------------------------------------------------------------------
 vector<BYTE> CHash::GetObjectHash(CBlockHeader& a_cBlockHeader)
 {
-	// Serialization lib 찾아보기.
+	// Serialization lib 찾아 보기.
 	BYTE encypt[32];
 
 	stringstream ss;
 	string kStr;
 	ss << a_cBlockHeader.GetBlockTime();
-	ss << a_cBlockHeader.nTime;
-	ss << a_cBlockHeader.nBits;
-	ss << a_cBlockHeader.nNonce;	
+	ss << a_cBlockHeader.m_nTime;
+	ss << a_cBlockHeader.m_nBits;
+	ss << a_cBlockHeader.m_nNonce;
 	
 	for (BYTE by = 0; by < a_cBlockHeader.previousblockhash.size(); by++)
 	{

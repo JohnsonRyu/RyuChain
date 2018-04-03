@@ -33,7 +33,7 @@ bool CPow::SetNonce(uint32_t a_unNonce)
 		return false;
 	}
 
-	m_CBlockHeader->nNonce = a_unNonce;
+	m_CBlockHeader->m_nNonce = a_unNonce;
 
 	return CompareHash();
 }

@@ -13,6 +13,7 @@
 CBlockHeader::CBlockHeader()
 {
 	Init();
+	SetBlockTime();
 }
 //--------------------------------------------------------------------------------------------------
 CBlockHeader::~CBlockHeader(){}
@@ -21,10 +22,10 @@ void CBlockHeader::Init()
 {
 	previousblockhash.clear();
 
-	nHeight = 0;
-	nTime	= 0;
-	nBits	= 0;
-	nNonce	= 0;
+	m_nHeight = 0;
+	m_nTime = 0;
+	m_nBits = 0;
+	m_nNonce = 0;
 }
 //--------------------------------------------------------------------------------------------------
 void CBlockHeader::LogData()
@@ -57,27 +58,27 @@ void CBlockHeader::LogData()
 		printf("%02X", thisBlockHash[by]);
 	}
 
-	printf("\n-CurBlockHeingt : %d", nHeight);
-	printf("\n--CurBlockTime : %"PRIu64"", nTime);
-	printf("\n---CurBlockBits : %d", nBits);
-	printf("\n----CurBlockNonce : %d", nNonce);
+	printf("\n-CurBlockHeingt : %d", m_nHeight);
+	printf("\n--CurBlockTime : %"PRIu64"", m_nTime);
+	printf("\n---CurBlockBits : %d", m_nBits);
+	printf("\n----CurBlockNonce : %d", m_nNonce);
 
 	printf("\n\n");
 }
 //--------------------------------------------------------------------------------------------------
 bool CBlockHeader::IsNull()
 {
-	return nBits == 0;
+	return m_nBits == 0;
 }
 //--------------------------------------------------------------------------------------------------
 void CBlockHeader::SetBlockTime()
 {
-	nTime = chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now().time_since_epoch()).count();
+	m_nTime = chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now().time_since_epoch()).count();
 }
 //--------------------------------------------------------------------------------------------------
 int64_t CBlockHeader::GetBlockTime()
 {
-	return static_cast<int64_t>(nTime);
+	return static_cast<int64_t>(m_nTime);
 }
 //--------------------------------------------------------------------------------------------------
 vector<BYTE> CBlockHeader::GetBlockHash()

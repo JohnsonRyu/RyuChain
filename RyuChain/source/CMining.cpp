@@ -41,7 +41,7 @@ void CMining::Update()
 	{
 		if (m_pPow->SetNonce(nNonce))
 		{
-			m_pCurBlockHeader->nNonce = nNonce;
+			m_pCurBlockHeader->m_nNonce = nNonce;
 			FindBlock();
 		}
 		else
