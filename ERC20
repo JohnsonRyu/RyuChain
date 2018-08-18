@@ -94,9 +94,6 @@ contract Ownable {
     }
 
     modifier onlyOwner() { require(msg.sender == owner); _; }
-        emit OperatorTransferred(operator, _newOperator);
-        operator = _newOperator;
-    }
 }
 // ----------------------------------------------------------------------------
 // @title BlackList
@@ -111,7 +108,7 @@ contract BlackList is Ownable {
 
     modifier CheckBlackList { require(blackList[msg.sender] != true); _; }
 
-    function SetLockAddress(address _lockAddress) external onlyOwnerOrOperator returns (bool) {
+    function SetLockAddress(address _lockAddress) external onlyOwner returns (bool) {
         require(_lockAddress != address(0));
         require(_lockAddress != owner);
         require(blackList[_lockAddress] != true);
